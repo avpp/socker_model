@@ -21,6 +21,10 @@ while True:
 			pg.quit();
 			sys.exit();
 		elif event.type == MOUSEBUTTONUP:
+			if event.button == 1:
+				xp = event.pos[0] - curPos[0];
+				yp = event.pos[1] - curPos[1];
+				wm.mousePress(xp, yp);
 			if event.button == 3:
 				wm.kick_ball(event.pos[0] - curPos[0], event.pos[1] - curPos[1]);
 		elif event.type == MOUSEMOTION:
