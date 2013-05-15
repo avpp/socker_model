@@ -1,23 +1,27 @@
 import pygame as pg;
-import model;
+#import model;
+from field import *;
+from goal import *;
+from ball import *;
+from player import *;
 import math;
 
 class worldModel:
 	def __init__(self, sf):
 		self.sf = sf;
 		self.objects = [];
-		self.ball = model.Ball();
+		self.ball = Ball();
 		self.goals = [];
-		self.goals.append(model.Goal(-163, -30, 15, 60));
-		self.goals.append(model.Goal(149, -30, 15, 60));
-		self.field = model.Field(300, 200, self.ball, self.goals);
+		self.goals.append(Goal(-163, -30, 15, 60));
+		self.goals.append(Goal(149, -30, 15, 60));
+		self.field = Field(300, 200, self.ball, self.goals);
 		self.t1pl = [];
 		self.t2pl = [];
 		for i in range(0, 10):
 			x =  40 + ((i+1)%3)*40;
 			y = (-0.5 + 0.125)*self.field.height + 0.25*self.field.height*(i/3) + 0.5*0.125*self.field.height*(i%3)*((i+1)%3 + (i+2)%3);
-			self.t1pl.append(model.Player(self.field, -x, y, 0, 0, pg.Color(255, 0, 0), 't1p' + str(i)));
-			self.t2pl.append(model.Player(self.field,  x, y, 0, 1, pg.Color(0, 0, 255), 't2p' + str(i)));
+			self.t1pl.append(Player(self.field, -x, y, 0, 0, pg.Color(255, 0, 0), 't1p' + str(i)));
+			self.t2pl.append(Player(self.field,  x, y, 0, 1, pg.Color(0, 0, 255), 't2p' + str(i)));
 		self.objects.append(self.field);
 		self.objects.append(self.ball);
 		self.objects.extend(self.goals);
