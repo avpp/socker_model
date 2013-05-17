@@ -1,16 +1,27 @@
 import pygame as pg;
 
-class gameObject:
+class drawableObject:
+	def draw(self, sf, xoff, yoff):
+		if self.x == None:
+			self.x = 0;
+		if self.y == None:
+			self.y = 0;
+		pg.draw.circle(sf, pg.Color(0, 0, 0), (self.x+xoff, self.y+yoff), 3, 2);
+
+class gameObject(drawableObject):
 	x = .0;
 	y = .0;
 	width = .0;
 	height = .0;
+	def __init__(self, x = 0.0, y = 0.0, w = 0.0, h = 0.0):
+		self.x = x;
+		self.y = y;
+		self.width = w;
+		self.height = h;
 	def get_center(self):
 		return (self.x + self.width/2, self.y + self.width/2);
 	def update(self):
-		self;
-	def draw(self, sf, xoff, yoff):
-		pg.draw.circle(sf, pg.Color(0, 0, 0), (x+xoff, y+yoff), 3, 2);
+		pass;
 	def is_in(self, obj):
 		return (obj.x <= self.x) and (self.x + self.width <= obj.x + obj.width) and (obj.y <= self.y) and (self.y + self.height <= obj.y + obj.height);
 
@@ -21,7 +32,8 @@ class movableObject(gameObject):
 	ay = .0;
 	a_mod = -0.7;
 	t = None;
-	def __init__(self):
+	def __init__(self, x = 0, y = 0):
+		gameObject.__init__(self, x, y);
 		self.t = pg.time.Clock();
 		self.t.tick_busy_loop();
 	def move(self):

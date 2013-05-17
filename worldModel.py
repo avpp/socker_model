@@ -4,6 +4,7 @@ from field import *;
 from goal import *;
 from ball import *;
 from player import *;
+from copter import *;
 import math;
 
 class worldModel:
@@ -22,11 +23,17 @@ class worldModel:
 			y = (-0.5 + 0.125)*self.field.height + 0.25*self.field.height*(i/3) + 0.5*0.125*self.field.height*(i%3)*((i+1)%3 + (i+2)%3);
 			self.t1pl.append(Player(self.field, -x, y, 0, 0, pg.Color(255, 0, 0), 't1p' + str(i)));
 			self.t2pl.append(Player(self.field,  x, y, 0, 1, pg.Color(0, 0, 255), 't2p' + str(i)));
+		aaa = [];
+		aaa.extend(self.t1pl);
+		aaa.extend(self.t2pl);
+		self.copter = Copter(0, -150, aaa);
+
 		self.objects.append(self.field);
 		self.objects.append(self.ball);
 		self.objects.extend(self.goals);
 		self.objects.extend(self.t1pl);
 		self.objects.extend(self.t2pl);
+		self.objects.append(self.copter);
 		self.fontObj = pg.font.Font(pg.font.get_default_font(), 15);
 	def drawAll(self):
 		for o in self.objects:
