@@ -1,7 +1,8 @@
 import sys;
 import pygame as pg;
 from pygame.locals import *;
-from worldModel import *;
+#from worldModel import *;
+from point_test import *;
 
 pg.init();
 fpsClock = pg.time.Clock();
