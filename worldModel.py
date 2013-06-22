@@ -55,7 +55,7 @@ class worldModel:
 			self.r2.append(self.sf.blit(self.fontObj.render(p.name+' '+str(int(p.energy)), False, cl), (550, 30 + i*25)));
 		self.sf.blit(self.fontObj.render('Ball v=' + str(math.sqrt(self.ball.vx*self.ball.vx + self.ball.vy*self.ball.vy)) + ' lk=' + str(self.ball.tlk),False, pg.Color(0, 150, 0, 128)), (250, 350));
 	def update(self):
-		self;
+		pass;
 	def iteration(self):
 		self.update();
 		for o in self.objects:

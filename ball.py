@@ -19,6 +19,7 @@ class Ball(movableObject):
 #		self.t.tick_busy_loop();
 	def draw(self, sf, xoff, yoff):
 		pg.draw.circle(sf, pg.Color(255,255,255), (int(self.x + xoff), int(self.y + yoff)),5);
+		pg.draw.line(sf, pg.Color(255,255,255), (int(self.x) + xoff, int(self.y) + yoff), (int(self.x + self.vx) + xoff, int(self.y + self.vy) + yoff), 1);
 	def think(self):
 		self.tlk += self.time_last_kick.tick_busy_loop();
 #	def update(self):

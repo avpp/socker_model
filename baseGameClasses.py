@@ -1,12 +1,14 @@
 import pygame as pg;
 
 class drawableObject:
+	defColor = pg.Color(0, 0, 0);
+	defSize = 3;
 	def draw(self, sf, xoff, yoff):
 		if self.x == None:
 			self.x = 0;
 		if self.y == None:
 			self.y = 0;
-		pg.draw.circle(sf, pg.Color(0, 0, 0), (self.x+xoff, self.y+yoff), 3, 2);
+		pg.draw.circle(sf, self.defColor, (int(self.x+xoff), int(self.y+yoff)), self.defSize, 2);
 
 class gameObject(drawableObject):
 	x = .0;
@@ -30,7 +32,7 @@ class movableObject(gameObject):
 	vy = .0;
 	ax = .0;
 	ay = .0;
-	a_mod = -0.7;
+	a_mod = -0.47;
 	t = None;
 	def __init__(self, x = 0, y = 0):
 		gameObject.__init__(self, x, y);
@@ -38,10 +40,10 @@ class movableObject(gameObject):
 		self.t.tick_busy_loop();
 	def move(self):
 		ms = self.t.tick_busy_loop();
-		self.x = self.x + self.vx*ms/1000;
-		self.y = self.y + self.vy*ms/1000;
-		self.vx = self.vx + (self.vx*self.a_mod + self.ax)*ms/1000;
-		self.vy = self.vy + (self.vy*self.a_mod + self.ay)*ms/1000;
+		self.x = self.x + self.vx*ms*0.001;
+		self.y = self.y + self.vy*ms*0.001;
+		self.vx = self.vx + (self.vx*self.a_mod + self.ax)*ms*0.001;
+		self.vy = self.vy + (self.vy*self.a_mod + self.ay)*ms*0.001;
 	def think(self):
 		pass
 	def update(self):

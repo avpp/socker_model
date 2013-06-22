@@ -4,6 +4,8 @@ import random;
 from myGauss import *;
 from baseGameClasses import *;
 
+random.seed();
+
 class Player(movableObject):
 	def __init__(self, field, x, y, role, teamNumber, color, name = ''):
 		movableObject.__init__(self);
@@ -61,7 +63,10 @@ class Player(movableObject):
 		wog  = gradGaussND(((self.x, 100), (self.y, 100)), (og.get_center()[0], og.get_center()[1]));
 		wogd = 1 - gaussND(((self.x, 100), (self.y, 100)), (og.get_center()[0], og.get_center()[1]));
 		wogdn = wogd / gaussND(((0, 100), (0, 100)), (0, 0));
-		
+
+
+		vx = self.vx;
+		vy = self.vy;
 		#change velocity
 		self.vx  = w1[0]*w1dd*1000000*wkb;
 		self.vy  = w1[1]*w1dd*1000000*wkb;
@@ -77,6 +82,11 @@ class Player(movableObject):
 		self.vx = self.vx * (1 + random.gauss(0, 1)/10);
 		self.vy = self.vy * (1 + random.gauss(0, 1)/10);
 
+
+#		self.ax = self.vx/100;
+#		self.ay = self.vy/100;
+#		self.vx = vx;
+#		self.vy = vy;
 		#change accelerate
 		self.ax  = w1[0]*w1dd;
 		self.ay  = w1[1]*w1dd;
@@ -84,7 +94,7 @@ class Player(movableObject):
 		self.ay += wog[1]*wogdn;
 		
 
-		de=self.energy*self.energy/(self.vx*self.vx + self.vy*self.vy);
+		de=(self.vx*self.vx + self.vy*self.vy);
 #		if de < 1:
 #			self.vx *= de;
 #			self.vy *= de; 
